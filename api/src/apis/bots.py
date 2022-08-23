@@ -2,7 +2,7 @@ from flask_restx import Namespace, fields, Resource, abort
 from flask_restx.reqparse import RequestParser
 from http import HTTPStatus
 from src.services import BotsService
-
+from src import apm
 bots_ns = Namespace('bots',
                     description='The service provides the functionality needed '
                                 'to manage bots')
@@ -126,6 +126,7 @@ class BotStatusAPI(Resource):
     def put(self):
         bot_data = self.req_parser.parse_args()
         res, msg, code = BotsService.put_status_bot(**bot_data)
+        apm.capture_message('hello, world!')
         return {
                    "message": msg,
                    "status_code": HTTPStatus.CREATED,

@@ -13,6 +13,7 @@ COPY requirements.txt /usr/src/app/api/
 RUN pip install -r requirements.txt
 # copy project
 COPY . /usr/src/app/api/
+
 #EXPOSE 5001
 #RUN gunicorn -b 0.0.0.0:8080 wsgi
 #RUN python wsgi.py upgrade
